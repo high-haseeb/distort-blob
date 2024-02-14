@@ -6,18 +6,20 @@ import {
   Stars,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Bloom, EffectComposer, Noise } from "@react-three/postprocessing";
-import React, { useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 
 const Blob = () => {
   return (
+    <Suspense fallback={
+      <div className="w-screen h-screen bg-black flex items-center justify-center text-white text-9xl">Loading..</div>
+    }>
     <Canvas className="bg-black">
       <Stars />
       <Environment preset="dawn" />
       <PresentationControls>
         <Model />
       </PresentationControls>
-    </Canvas>
+    </Canvas></Suspense>
   );
 };
 
