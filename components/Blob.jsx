@@ -1,7 +1,7 @@
 "use client";
-import { Environment, MeshWobbleMaterial, PresentationControls, Stars, Sphere } from "@react-three/drei";
+import { Environment, PresentationControls, ScrollControls, useScroll } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { Suspense, useMemo, useEffect, useRef } from "react";
+import React, { Suspense, useMemo, useRef } from "react";
 import fragmentShader from "@/shaders/fragmentShader.glsl";
 import vertexShader from "@/shaders/vertexShader.glsl";
 import { MathUtils } from "three";
@@ -9,12 +9,14 @@ import { MathUtils } from "three";
 const Scene = () => {
   return (
     <Suspense fallback={<div className="w-screen h-screen bg-black flex items-center justify-center text-white text-9xl">Loading..</div>}>
-      <Canvas className="bg-black">
+      <Canvas className="bg-[#181818]">
         <Environment preset="dawn" />
         <ambientLight />
-        <PresentationControls>
+
+        <ScrollControls horizontal pages={3}>
           <Blob />
-        </PresentationControls>
+        </ScrollControls>
+
       </Canvas>
     </Suspense>
   );
@@ -38,13 +40,13 @@ const Blob = () => {
     [],
   );
 
+  const data = useScroll();
   useFrame((state) => {
     const { clock } = state;
     mesh.current.material.uniforms.u_time.value = 0.4 * clock.getElapsedTime();
-
     mesh.current.material.uniforms.u_intensity.value = MathUtils.lerp(
       mesh.current.material.uniforms.u_intensity.value,
-      hover.current ? 0.85 : 0.15,
+      data.range(0, 1/3),
       0.02,
     );
   });
