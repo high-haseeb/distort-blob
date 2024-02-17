@@ -26,7 +26,6 @@ const Scene = () => {
           </Html>
           <Blob />
         </ScrollControls>
-        <OrbitControls enableZoom={false} />
       </Canvas>
     </Suspense>
   );
