@@ -101,7 +101,7 @@ float fit(float unscaled, float min, float max, float newMin, float newMax) {
   return (unscaled - min) / (max - min) * (newMax - newMin) + newMin;
 }
 float wave(float position){
-  return fit(smoothMod(position * 4.0, 1.0, 1.5), 0.3, 0.6, 0.0, 1.0);
+  return fit(smoothMod(position * 4.0, 1.0, 1.5), 0.3, 0.5, 0.0, 1.0);
 }
 
 float customMod(float axis, float amp, float rad){
