@@ -1,4 +1,6 @@
-import Scene from "@/components/Blob"
+'use client'
+
+import Scene from "@/components/Blob";
 
 export default function Home() {
   return (
